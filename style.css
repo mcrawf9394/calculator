@@ -2,5 +2,10 @@ h1 {
     color: floralwhite;
     font-weight: bolder;
     font-style: italic;
-    text-shadow: 20px;
+    text-shadow: #FC0 1px 0 10px;
+    text-align: center;
+    padding-top: 5vh;
+}
+html {
+    background-color: #5e5c64;
 }
