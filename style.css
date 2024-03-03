@@ -9,3 +9,28 @@ h1 {
 html {
     background-color: #5e5c64;
 }
+#numButtons {
+    display: inline-block;
+    width: 33vw;
+    height: 70vh;
+}
+.numButtonsOne {
+    width: 33%;
+    height: 25%;
+    display: inline;
+}
+.numButtonsTwo {
+    width: 33%;
+    height: 25%;
+    display: inline;
+}
+.numButtonsThree {
+    width: 33%;
+    height: 25%;
+    display: inline;
+}
+.numButtonsFour {
+    width: 100%;
+    height: 25%;
+    display: block;
+}
