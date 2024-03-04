@@ -3,10 +3,12 @@ const inputs = []
 const operators = []
 const numButtonsContainer = document.getElementById('numButtons')
 const operatorButtonsContainer = document.getElementById('operators')
-let z = 0
+const display = []
+let displayJoin = display.join(' ')
+const textDisplay = document.createElement('h2')
+textDisplay.textContent = displayJoin
 const calculator = document.getElementById('calculator')
-//this event listener is intended on displaying the numbers and operators before the user clicks on the equals operator
-calculator.addEventListener('click', )
+calculator.appendChild(textDisplay)
 for (i = 7; i <= 9; i++) {
     const button = document.createElement('button')
     button.textContent = i
@@ -14,8 +16,7 @@ for (i = 7; i <= 9; i++) {
     button.value = i
     numButtonsContainer.appendChild(button)
     button.addEventListener('click', function () {
-        inputs.push(button.value)
-        z++
+    inputs.push(button.value)
         })
     }
 for (j = 4; j <= 6; j++) {
@@ -25,8 +26,7 @@ for (j = 4; j <= 6; j++) {
     button.value = j
     numButtonsContainer.appendChild(button)
     button.addEventListener('click', function () {
-        inputs.push(button.value)
-        z++
+    inputs.push(button.value)
          })
     }
 for (k = 1; k <= 3; k++) {
@@ -36,8 +36,8 @@ for (k = 1; k <= 3; k++) {
     button.value = k
     numButtonsContainer.appendChild(button)
     button.addEventListener('click', function () {
-        inputs.push(button.value)
-        z++
+    inputs.push(button.value)
+    display.push(button.value)
         })
     }
 const zero = document.createElement('button')
@@ -45,13 +45,11 @@ zero.textContent = 0
 zero.className = "numButtonsFour"
 zero.value = 0
 numButtonsContainer.appendChild(zero)
-zero.addEventListener('click', function () {
-    inputs.push(zero.value)
-    z++
+zero.addEventListener('click', function () { inputs.push(zero.value)
 })
 const additionButton = document.getElementById('addition')
-additionButton.addEventListener('click', moveOperator(additionButton.value))
-const subtractionButton = document.getElementById('subraction')
+additionButton.addEventListener('click', () => moveOperator(additionButton.value))
+const subtractionButton = document.getElementById('subtraction')
 subtractionButton.addEventListener('click', moveOperator(subtractionButton.value))
 const divisionButton = document.getElementById('division')
 divisionButton.addEventListener('click', moveOperator(divisionButton.value))
@@ -59,11 +57,32 @@ const multiplicationButton = document.getElementById('multiplication')
 multiplicationButton.addEventListener('click', moveOperator(multiplicationButton.value))
 const equalsButton = document.getElementById('equals')
 equalsButton.addEventListener('click', solve())
-//find a way to have the program check to see if the operators array is empty and if 0 has or has not been selected before allowing them to enter another operator
 function moveOperator (value){
+    nums = inputs.join("")
     operators.push(value)
+    display.push(value)
 }
 //this should allow for a separate function that actual preforms the operator that was stored, might also add the number into a separate totals section or maybe the total should replace the num value not sure yet
-function solve (){
-
+function solve (currentOperator){
+    if (currentOperator = "+")
+        addition()
+    else if (currentOperator = "-")
+        subtraction ()
+    else if (currentOperator = "/")
+        division ()
+    else
+        multiplication()
+}
+function addition(a,b){
+    console.log(a+b)
+    return a+b;
+}
+function subtraction (){
+    return a-b;
+}
+function division (){
+    return a/b;
+}
+function multiplication(){
+    return a*b;
 }
