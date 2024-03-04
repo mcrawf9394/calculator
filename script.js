@@ -4,6 +4,8 @@ let operator = []
 let display = []
 let i = 0
 let numOneWorkable
+let calculatorText = document.getElementById('calculatorText')
+calculatorText.textContent = "0"
 function solve (a,b,c) {
     if (b == "+"){
         numOneWorkable = a + c
@@ -19,12 +21,20 @@ function solve (a,b,c) {
     }
     else {
         alert("Something went wrong here! Clearing calculator!")
-        
+        clear()
     }
     numTwo.length = 0
     display.push("=", numOneWorkable)
-    console.log(display)
-    console.log(b)
+    calculatorText.textContent = display
+}
+function clear (){
+    numOne.length = 0
+    numTwo.length = 0
+    operator.length = 0
+    display.length = 0
+    numOneWorkable = 0
+    i = 0
+    calculatorText.textContent = "0"
 }
 const numButtons = document.querySelectorAll('.numButtons')
 numButtons.forEach((numButton) => {
@@ -34,10 +44,12 @@ function numInputHandling (value){
     if (operator.length == 0) {
         display.push(value)
         numOne.push(value)
+        calculatorText.textContent = display
     }
     if(operator.length >= 1) {
         display.push(value)
         numTwo.push(value)
+        calculatorText.textContent = display
     }
 }
 const operatorNums = document.querySelectorAll('.operatorButtons')
@@ -51,20 +63,33 @@ function operatorInputHandling (value){
         numOneWorkable = parseFloat(numOne.reduce((total, clickedNum) => {
             return total + clickedNum;
         }))
-    }
-    else if (value = "="){
-        let numTwoWorkable = parseFloat(numTwo.reduce((total, clickedNum) => {
-            return total + clickedNum;
-        }))
-        solve (numOneWorkable, operator [i], numTwoWorkable)
-    }
-    else  {
-        let numTwoWorkable = parseFloat(numTwo.reduce((total, clickedNum) => {
-            return total + clickedNum;
-        }))
-        solve (numOneWorkable, operator [i], numTwoWorkable)
         i++
+        calculatorText.textContent = display
+    }
+    else if (value == "="){
+        let numTwoWorkable = parseFloat(numTwo.reduce((total, clickedNum) => {
+            return total + clickedNum;
+        }))
+        solve (numOneWorkable, operator [i-1], numTwoWorkable)
+    }
+    else if (value == "clear") {
+        clear ()
+    }
+    else if(numTwo.length != 0) {
+        let numTwoWorkable = parseFloat(numTwo.reduce((total, clickedNum) => {
+            return total + clickedNum;
+        }))
         operator.push(value)
+        solve (numOneWorkable, operator [i-1], numTwoWorkable)
+        i++
+        display.push(value)
+        calculatorText.textContent = display
+    }
+    else{
+        operator.push(value)
+        i++
+        display.push(value)
+        calculatorText.textContent = display
     }
     console.log(operator[i])
 }
