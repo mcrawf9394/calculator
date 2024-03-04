@@ -3,20 +3,28 @@ let numTwo = []
 let operator = []
 let display = []
 let i = 0
-function addition (a,b){
-    return a+b;
-}
-function subtraction(a,b){
-    return a-b;
-}
-function division (a,b){
-    return a/b;
-}
-function multiplication (a,b){
-    return a*b;
-}
+let numOneWorkable
 function solve (a,b,c) {
-
+    if (b == "+"){
+        numOneWorkable = a + c
+    }
+    else if (b == "-") {
+        numOneWorkable = a - c;
+    }
+    else if (b == "/") {
+        numOneWorkable = a / c;
+    }
+    else if (b == "*"){
+        numOneWorkable = a * c;
+    }
+    else {
+        alert("Something went wrong here! Clearing calculator!")
+        
+    }
+    numTwo.length = 0
+    display.push("=", numOneWorkable)
+    console.log(display)
+    console.log(b)
 }
 const numButtons = document.querySelectorAll('.numButtons')
 numButtons.forEach((numButton) => {
@@ -37,20 +45,26 @@ operatorNums.forEach((operatorNum) => {
     operatorNum.addEventListener('click', () => operatorInputHandling(operatorNum.value))
 })
 function operatorInputHandling (value){
-    if ((operator.length >= 1) || (value = "=")) {
-        let numOneWorkable = parseFloat(numOne.reduce((total, clickedNum) => {
+    if (operator.length == 0) {
+        display.push(value)
+        operator.push(value)
+        numOneWorkable = parseFloat(numOne.reduce((total, clickedNum) => {
             return total + clickedNum;
         }))
+    }
+    else if (value = "="){
         let numTwoWorkable = parseFloat(numTwo.reduce((total, clickedNum) => {
             return total + clickedNum;
         }))
-        i++
-        solve (numOneWorkable, operator [i-1], numTwoWorkable)
+        solve (numOneWorkable, operator [i], numTwoWorkable)
     }
-    else {
-        display.push(value)
+    else  {
+        let numTwoWorkable = parseFloat(numTwo.reduce((total, clickedNum) => {
+            return total + clickedNum;
+        }))
+        solve (numOneWorkable, operator [i], numTwoWorkable)
+        i++
         operator.push(value)
-        i++
     }
-    console.log(operator)
+    console.log(operator[i])
 }
