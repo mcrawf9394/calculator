@@ -4,6 +4,7 @@ let operator = []
 let display = []
 let i = 0
 let numOneWorkable
+let displayNew
 let calculatorText = document.getElementById('calculatorText')
 calculatorText.textContent = "0"
 function solve (a,b,c) {
@@ -25,7 +26,8 @@ function solve (a,b,c) {
     }
     numTwo.length = 0
     display.push("=", numOneWorkable)
-    calculatorText.textContent = display
+    displayNew = display.join("")
+    calculatorText.textContent = displayNew
 }
 function clear (){
     numOne.length = 0
@@ -44,12 +46,14 @@ function numInputHandling (value){
     if (operator.length == 0) {
         display.push(value)
         numOne.push(value)
-        calculatorText.textContent = display
+        displayNew = display.join("")
+        calculatorText.textContent = displayNew
     }
     if(operator.length >= 1) {
         display.push(value)
         numTwo.push(value)
-        calculatorText.textContent = display
+        displayNew = display.join("")
+        calculatorText.textContent = displayNew
     }
 }
 const operatorNums = document.querySelectorAll('.operatorButtons')
@@ -60,11 +64,12 @@ function operatorInputHandling (value){
     if (operator.length == 0) {
         display.push(value)
         operator.push(value)
+        displayNew = display.join("")
         numOneWorkable = parseFloat(numOne.reduce((total, clickedNum) => {
             return total + clickedNum;
         }))
         i++
-        calculatorText.textContent = display
+        calculatorText.textContent = displayNew
     }
     else if (value == "="){
         let numTwoWorkable = parseFloat(numTwo.reduce((total, clickedNum) => {
@@ -83,13 +88,15 @@ function operatorInputHandling (value){
         solve (numOneWorkable, operator [i-1], numTwoWorkable)
         i++
         display.push(value)
-        calculatorText.textContent = display
+        displayNew = display.join("")
+        calculatorText.textContent = displayNew
     }
     else{
         operator.push(value)
         i++
         display.push(value)
-        calculatorText.textContent = display
+        displayNew = display.join("")
+        calculatorText.textContent = displayNew
     }
     console.log(operator[i])
 }
